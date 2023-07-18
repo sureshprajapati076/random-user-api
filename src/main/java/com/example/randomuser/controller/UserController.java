@@ -19,7 +19,6 @@ public class UserController {
     }
 
     @PostMapping(value = "/post")
-
     public String postAll(@RequestBody List<User> results) {
         userRepo.saveAll(results);
         return "Completed!";
