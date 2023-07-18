@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 public class UserController {
 
+    private static final String RESULTS = "$.results[INDEX]";
     private final PersonRepo personRepo;
 
     public UserController(PersonRepo personRepo) {
@@ -29,20 +30,21 @@ public class UserController {
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < index; i++) {
             try {
+                var prefixJsonPath = RESULTS.replace("INDEX",String.valueOf(i));
                 var user = User.builder()
-                        .dob(parsedRequest.read("$.results[" + i + "].dob.date"))
-                        .phone(parsedRequest.read("$.results[" + i + "].phone"))
-                        .age(parsedRequest.read("$.results[" + i + "].dob.age"))
-                        .address(parsedRequest.read("$.results[" + i + "].location.street.name"))
-                        .city(parsedRequest.read("$.results[" + i + "].location.city"))
-                        .fname(parsedRequest.read("$.results[" + i + "].name.first"))
-                        .lname(parsedRequest.read("$.results[" + i + "].name.last"))
-                        .state(parsedRequest.read("$.results[" + i + "].location.state"))
-                        .title(parsedRequest.read("$.results[" + i + "].name.title"))
-                        .email(parsedRequest.read("$.results[" + i + "].email"))
-                        .country(parsedRequest.read("$.results[" + i + "].location.country"))
-                        .postalCode(parsedRequest.read("$.results[" + i + "].location.postcode").toString())
-                        .gender(parsedRequest.read("$.results[" + i + "].gender"))
+                        .dob(parsedRequest.read(prefixJsonPath+"dob.date"))
+                        .phone(parsedRequest.read(prefixJsonPath+"phone"))
+                        .age(parsedRequest.read(prefixJsonPath+"dob.age"))
+                        .address(parsedRequest.read(prefixJsonPath+"location.street.name"))
+                        .city(parsedRequest.read(prefixJsonPath+"location.city"))
+                        .fname(parsedRequest.read(prefixJsonPath+"name.first"))
+                        .lname(parsedRequest.read(prefixJsonPath+"name.last"))
+                        .state(parsedRequest.read(prefixJsonPath+"location.state"))
+                        .title(parsedRequest.read(prefixJsonPath+"name.title"))
+                        .email(parsedRequest.read(prefixJsonPath+"email"))
+                        .country(parsedRequest.read(prefixJsonPath+"location.country"))
+                        .postalCode(parsedRequest.read(prefixJsonPath+"location.postcode").toString())
+                        .gender(parsedRequest.read(prefixJsonPath+"gender"))
                         .build();
                 userList.add(user);
             } catch (Exception ignored) {

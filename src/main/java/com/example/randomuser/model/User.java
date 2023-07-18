@@ -36,5 +36,6 @@ public class User {
     private String dob;
     private Integer age;
     private String phone;
+    private String comments;
 
 }
