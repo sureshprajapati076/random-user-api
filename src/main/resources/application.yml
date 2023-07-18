@@ -1,0 +1,11 @@
+#file: noinspection undefined
+server:
+  port: 9988
+spring:
+  datasource:
+    username: batch
+    password: batch
+    url: jdbc:mysql://localhost:3306/person
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
