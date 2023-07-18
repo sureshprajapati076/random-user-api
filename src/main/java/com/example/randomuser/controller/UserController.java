@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class PersonController {
+public class UserController {
 
     private final PersonRepo personRepo;
 
-    public PersonController(PersonRepo personRepo) {
+    public UserController(PersonRepo personRepo) {
         this.personRepo = personRepo;
     }
 
