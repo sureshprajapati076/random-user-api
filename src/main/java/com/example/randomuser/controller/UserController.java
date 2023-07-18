@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private static final String RESULTS = "$.results[INDEX]";
     private final UserRepo userRepo;
 
     public UserController(UserRepo userRepo) {
