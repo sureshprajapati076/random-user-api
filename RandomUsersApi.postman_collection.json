@@ -7,24 +7,50 @@
 	},
 	"item": [
 		{
-			"name": "Random User API",
+			"name": "Random_User_API",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"let responseData = pm.response.json();\r",
-							"console.log(responseData)\r",
+							"\r",
+							"let allResults = responseData.results;\r",
+							"\r",
+							"let requestBody=[];\r",
+							"\r",
+							"for(let r of allResults){\r",
+							"\r",
+							"    requestBody.push( {\r",
+							"        \"gender\": r.gender,\r",
+							"        \"dob\": r.dob.date,\r",
+							"        \"age\": r.dob.age,\r",
+							"        \"phone\": r.phone,\r",
+							"        \"address\": r.location.street.name,\r",
+							"        \"city\": r.location.city,\r",
+							"        \"fname\": r.name.first,\r",
+							"        \"lname\": r.name.last,\r",
+							"        \"title\": r.name.title,\r",
+							"        \"state\": r.location.state,\r",
+							"        \"email\": r.email,\r",
+							"        \"country\": r.location.country,\r",
+							"        \"postalCode\": r.location.postcode\r",
+							"    })\r",
+							"   \r",
+							"}\r",
 							"\r",
 							"pm.sendRequest({\r",
 							"    url: 'http://localhost:9988/post',\r",
 							"    method: 'POST',\r",
+							"    header: {\r",
+							"    'Content-Type': 'application/json',\r",
+							"    },\r",
 							"    body: {\r",
 							"        mode: 'raw',\r",
-							"        raw: JSON.stringify(responseData)\r",
+							"        raw: requestBody\r",
 							"    }\r",
 							"}, function (err, res) {\r",
-							"    console.log(res);\r",
+							"   \r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -42,7 +68,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://randomuser.me/api?results=10",
+					"raw": "https://randomuser.me/api?results=2",
 					"protocol": "https",
 					"host": [
 						"randomuser",
@@ -54,7 +80,7 @@
 					"query": [
 						{
 							"key": "results",
-							"value": "10"
+							"value": "2"
 						}
 					]
 				}

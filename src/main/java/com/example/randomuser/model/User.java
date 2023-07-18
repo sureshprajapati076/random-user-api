@@ -22,7 +22,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String gender;
     private String fname;
     private String lname;
